@@ -1,0 +1,9 @@
+{
+  "name": "glm-test-engineer",
+  "description": "Test engineering agent for creating, reviewing, and improving test strategies and test cases",
+  "version": "0.0.1",
+  "author": {
+    "name": "gongchao",
+    "email": "chao.gong@z.ai"
+  }
+}
