@@ -1,9 +1,28 @@
 {
-  "name": "test-copilot",
-  "description": "Test engineering agent for creating, reviewing, and improving test strategies and test cases",
-  "version": "0.0.1",
+  "name": "glm-test-engineer",
+  "version": "0.1.0",
+  "description": "AI-powered test engineering agent for creating, reviewing, and improving test strategies and test cases for any software project",
   "author": {
-    "name": "gongchao",
-    "email": "chao.gong@z.ai"
-  }
+    "name": "Piyabordee",
+    "url": "https://github.com/Piyabordee"
+  },
+  "license": "MIT",
+  "keywords": [
+    "testing",
+    "qa",
+    "test-strategy",
+    "test-cases",
+    "rest-api",
+    "graphql",
+    "web-testing",
+    "mobile-testing",
+    "microservices",
+    "security-testing",
+    "owasp",
+    "performance-testing",
+    "bdd",
+    "gherkin"
+  ],
+  "repository": "https://github.com/Piyabordee/glm-test-engineer",
+  "homepage": "https://github.com/Piyabordee/glm-test-engineer"
 }
