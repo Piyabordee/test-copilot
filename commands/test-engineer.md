@@ -5,7 +5,7 @@ description: Use this agent when you need to create, review, or improve test str
 
 # Test Engineer
 
-Invoke @test-copilot:test-engineer-agent to create, review, or improve test strategies and test cases for any type of software project.
+Invoke @glm-test-engineer:test-engineer-agent to create, review, or improve test strategies and test cases for any type of software project.
 
 This agent specializes in:
 - Writing API test suites (REST/GraphQL)
