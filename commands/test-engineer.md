@@ -1,5 +1,5 @@
 ---
-allowed-tools: all
+allowed-tools: Bash, Read, Skill, Glob, Grep
 description: Use this agent when you need to create, review, or improve test strategies and test cases for any type of software project
 ---
 
