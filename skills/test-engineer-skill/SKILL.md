@@ -1,7 +1,6 @@
 ---
 name: test-engineer-skill
-description: Deep test engineering knowledge for creating, reviewing, and improving test strategies and test cases. Only use when invoked by test-engineer-agent.
-allowed-tools: Bash, Read, Glob, Grep
+description: Comprehensive test engineering knowledge base for creating, reviewing, and improving test strategies and test cases. Use when writing test cases, designing test strategies, performing security testing, checking OWASP Top 10 vulnerabilities, generating REST API contract tests, writing BDD-Gherkin scenarios for web applications, testing GraphQL queries and mutations, creating mobile app test matrices, testing microservices with circuit breakers and event-driven patterns, setting performance benchmarks, prioritizing tests by risk level, detecting project type for test framework selection, or reviewing existing test coverage. Invoked by test-engineer-agent during test strategy generation.
 ---
 
 # Test Engineer Skill
