@@ -9,7 +9,7 @@
     {
       "name": "test-copilot",
       "source": "./",
-      "description": "AI-powered test engineering agent that analyzes your codebase, detects project type and test framework, then generates comprehensive test strategies with security checklists, performance benchmarks, and risk-based prioritization. Supports REST API, GraphQL, Web, Mobile, and Microservices testing.",
+      "description": "AI-powered test Engineering agent that analyzes your codebase, detects project type and test framework, then generates comprehensive test strategies with security checklists, performance benchmarks, and risk-based prioritization. Supports REST API, GraphQL, Web, Mobile, and Microservices testing.",
       "version": "0.1.0",
       "author": {
         "name": "Piyabordee",
