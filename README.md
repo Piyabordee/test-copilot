@@ -1,29 +1,46 @@
-# Test Copilot
+# GLM Test Engineer
 
 AI-powered test engineering agent for creating, reviewing, and improving test strategies and test cases for any type of software project.
 
-This plugin extends Claude Code with a specialized test engineering agent.
+## Installation
 
-## How to use
+### Via Claude Code Marketplace (Recommended)
+
+In Claude Code, type:
+
+```
+GitHub: Piyabordee/glm-test-engineer
+```
+
+The plugin will be automatically discovered and installed.
+
+### Manual Installation
+
+See [INSTALLATION.md](INSTALLATION.md) for step-by-step manual setup.
+
+## How to Use
 
 In Claude Code, run:
+
 ```
-/test-copilot:test-engineer
+/glm-test-engineer:test-engineer
 ```
 
-## Command overview
+## Command Overview
 
 ### /test-engineer
 
 Create, review, or improve test strategies and test cases.
 
 **Execution flow:**
+
 1. Command `/test-engineer` triggers `@test-engineer-agent`
 2. The agent scans the codebase: detects project type, test framework, and inventories existing tests
-3. The agent invokes the test-engineer-skill for deep testing knowledge
+3. The agent invokes the `test-engineer-skill` for deep testing knowledge
 4. The agent generates a complete test strategy and self-checks output quality before delivering
 
 **Specializations:**
+
 - REST API Testing (contract testing, rate limiting, security headers)
 - GraphQL Testing (query complexity, nested resolvers, schema integrity)
 - Mobile Application Testing (network conditions, device fragmentation, lifecycle)
@@ -32,9 +49,23 @@ Create, review, or improve test strategies and test cases.
 - Security Testing (OWASP Top 10 injection, auth, authorization, data exposure)
 - Performance Testing (response time percentiles, throughput, load testing)
 
+## Architecture
+
+```
+Command → Agent → Skill
+   │         │        │
+   │         └── 4-phase QA engineer protocol
+   │              ├── Phase 1: Reconnaissance (project scan)
+   │              ├── Phase 2: Invoke Skill (load knowledge)
+   │              ├── Phase 3: Generate Output (strategy + checklist)
+   │              └── Phase 4: Self-Check (quality verify)
+   │
+   └── Entry point (/glm-test-engineer:test-engineer)
+```
+
 ## Example Output
 
-When you run `/test-copilot:test-engineer` in a Node.js REST API project, you can expect:
+When you run `/glm-test-engineer:test-engineer` in a Node.js REST API project, you can expect:
 
 ```
 # Test Strategy: My API Project
