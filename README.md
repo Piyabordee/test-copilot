@@ -22,9 +22,9 @@ Create, review, or improve test strategies and test cases.
 
 **Execution flow:**
 1. Command `/test-engineer` triggers `@test-engineer-agent`
-2. The agent analyzes the codebase and detects the project type
+2. The agent scans the codebase: detects project type, test framework, and inventories existing tests
 3. The agent invokes the test-engineer-skill for deep testing knowledge
-4. The agent generates comprehensive test strategies with specific, implementable test cases
+4. The agent generates a complete test strategy and self-checks output quality before delivering
 
 **Specializations:**
 - REST API Testing (contract testing, rate limiting, security headers)
@@ -52,12 +52,12 @@ When you run `/glm-test-engineer:test-engineer` in a Node.js REST API project, y
 
 ## Test Cases
 
-### Suite: Auth API (/api/auth)
-| # | Test Case | Method | Input | Expected | Priority |
-|---|-----------|--------|-------|----------|----------|
-| 1 | Login with valid credentials | POST | {email, password} | 200 + JWT | Critical |
-| 2 | Login with wrong password | POST | {email, "wrong"} | 401 | Critical |
-| 3 | Rate limit after 5 failures | POST | 6x failed login | 429 | Critical |
+### Suite: Auth API (`/api/auth`)
+| # | Test Case | Method | Endpoint | Input | Expected | Status |
+|---|-----------|--------|----------|-------|----------|--------|
+| 1 | Login with valid credentials | POST | /api/auth/login | {email, password} | 200 + JWT | Critical |
+| 2 | Login with wrong password | POST | /api/auth/login | {email, "wrong"} | 401 + error | Critical |
+| 3 | Rate limit after 5 failures | POST | /api/auth/login | 6x failed login | 429 + Retry-After | Critical |
 
 ### Security Tests
 - [ ] SQL injection on login email field

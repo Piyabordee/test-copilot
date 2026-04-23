@@ -42,7 +42,16 @@ You may detect multiple types — apply all relevant sections below.
 
 ### Step 2: Identify Test Framework
 
-Map the detected tech stack to the appropriate test framework:
+First, check if a test framework is already configured:
+```
+Grep in config files for: jest|vitest|mocha|cypress|playwright|pytest|unittest|junit|testify|detox
+Read: package.json → scripts.test, devDependencies
+Read: pyproject.toml → [tool.pytest], [project.optional-dependencies]
+Read: pom.xml → dependencies (junit, testng)
+```
+If a test framework is found → USE IT. Do not recommend a different one.
+
+If no test framework is found, map the detected tech stack:
 
 | Tech Stack | Test Framework | Assertion Library |
 |-----------|---------------|-------------------|
@@ -55,7 +64,18 @@ Map the detected tech stack to the appropriate test framework:
 | Flutter | integration_test | built-in |
 | .NET | xUnit / NUnit | FluentAssertions |
 
-If a test framework is already configured in the project, USE IT — do not recommend a different one.
+### Step 2.5: Review Existing Tests
+
+Before generating new tests, check what already exists:
+```
+Glob: **/*.test.*, **/*.spec.*, **/test_*, **/*_test.*, **/__tests__/**
+```
+Read every test file found. For each file, record:
+- What it tests (describe block / module name)
+- Key assertions it makes
+- What areas are NOT covered
+
+You will EXTEND existing tests, never duplicate them.
 
 ### Step 3: Apply Relevant Sections
 
