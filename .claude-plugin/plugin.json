@@ -1,5 +1,5 @@
 {
-  "name": "glm-test-engineer",
+  "name": "test-copilot",
   "version": "0.1.0",
   "description": "AI-powered test engineering agent for creating, reviewing, and improving test strategies and test cases for any software project",
   "author": {
@@ -23,6 +23,6 @@
     "bdd",
     "gherkin"
   ],
-  "repository": "https://github.com/Piyabordee/glm-test-engineer",
-  "homepage": "https://github.com/Piyabordee/glm-test-engineer"
+  "repository": "https://github.com/Piyabordee/test-copilot",
+  "homepage": "https://github.com/Piyabordee/test-copilot"
 }

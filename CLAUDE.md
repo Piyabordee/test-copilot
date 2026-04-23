@@ -2,7 +2,7 @@
 
 AI-powered test engineering agent for creating, reviewing, and improving test strategies and test cases.
 
-**Repository:** https://github.com/Piyabordee/glm-test-engineer
+**Repository:** https://github.com/Piyabordee/test-copilot
 
 ## Architecture
 
@@ -17,14 +17,14 @@ Command (commands/test-engineer.md)
 ## Repository Structure
 
 ```
-glm-test-engineer/
+test-copilot/
 ├── .claude-plugin/
 │   ├── plugin.json          — Plugin identity and metadata
 │   └── marketplace.json     — Marketplace listing for discovery
 ├── agents/
 │   └── test-engineer-agent.md  — Agent: 4-phase QA engineer protocol
 ├── commands/
-│   └── test-engineer.md        — Slash command: /glm-test-engineer:test-engineer
+│   └── test-engineer.md        — Slash command: /test-copilot:test-engineer
 ├── skills/
 │   └── test-engineer-skill/
 │       ├── SKILL.md            — Domain knowledge (testing strategies, checklists, templates)
@@ -63,4 +63,4 @@ When modifying this plugin:
 1. **Adding test categories** — Add new conditional sections to `skills/test-engineer-skill/SKILL.md` and update the agent's Phase 3 if needed
 2. **Changing output format** — Edit the Few-Shot Output Templates in the skill and the Self-Check in the agent
 3. **Adding new skills** — Create `skills/<name>/SKILL.md` with YAML frontmatter (`name`, `description`), then update `marketplace.json` keywords
-4. **Testing changes** — Run `/glm-test-engineer:test-engineer` in a sample project and verify the 4-phase output
+4. **Testing changes** — Run `/test-copilot:test-engineer` in a sample project and verify the 4-phase output

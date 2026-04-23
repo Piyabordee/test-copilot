@@ -1,5 +1,5 @@
 {
-  "name": "glm-test-engineer",
+  "name": "test-copilot",
   "description": "AI-powered test engineering agent for creating, reviewing, and improving test strategies and test cases",
   "owner": {
     "name": "Piyabordee",
@@ -7,7 +7,7 @@
   },
   "plugins": [
     {
-      "name": "glm-test-engineer",
+      "name": "test-copilot",
       "source": "./",
       "description": "AI-powered test engineering agent that analyzes your codebase, detects project type and test framework, then generates comprehensive test strategies with security checklists, performance benchmarks, and risk-based prioritization. Supports REST API, GraphQL, Web, Mobile, and Microservices testing.",
       "version": "0.1.0",
@@ -32,8 +32,8 @@
         "bdd",
         "gherkin"
       ],
-      "homepage": "https://github.com/Piyabordee/glm-test-engineer",
-      "repository": "https://github.com/Piyabordee/glm-test-engineer",
+      "homepage": "https://github.com/Piyabordee/test-copilot",
+      "repository": "https://github.com/Piyabordee/test-copilot",
       "license": "MIT"
     }
   ]

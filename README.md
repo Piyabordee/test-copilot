@@ -9,7 +9,7 @@ AI-powered test engineering agent for creating, reviewing, and improving test st
 In Claude Code, type:
 
 ```
-GitHub: Piyabordee/glm-test-engineer
+GitHub: Piyabordee/test-copilot
 ```
 
 The plugin will be automatically discovered and installed.
@@ -23,7 +23,7 @@ See [INSTALLATION.md](INSTALLATION.md) for step-by-step manual setup.
 In Claude Code, run:
 
 ```
-/glm-test-engineer:test-engineer
+/test-copilot:test-engineer
 ```
 
 ## Command Overview
@@ -60,12 +60,12 @@ Command → Agent → Skill
    │              ├── Phase 3: Generate Output (strategy + checklist)
    │              └── Phase 4: Self-Check (quality verify)
    │
-   └── Entry point (/glm-test-engineer:test-engineer)
+   └── Entry point (/test-copilot:test-engineer)
 ```
 
 ## Example Output
 
-When you run `/glm-test-engineer:test-engineer` in a Node.js REST API project, you can expect:
+When you run `/test-copilot:test-engineer` in a Node.js REST API project, you can expect:
 
 ```
 # Test Strategy: My API Project

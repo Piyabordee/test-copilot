@@ -14,7 +14,7 @@ The domain knowledge base for the GLM Test Engineer agent.
 
 ## How It Works
 
-This skill is invoked automatically by the `test-engineer-agent` during Phase 2 of its execution protocol. You do not need to invoke it directly — use the `/glm-test-engineer:test-engineer` command instead.
+This skill is invoked automatically by the `test-engineer-agent` during Phase 2 of its execution protocol. You do not need to invoke it directly — use the `/test-copilot:test-engineer` command instead.
 
 ## Related Files
 

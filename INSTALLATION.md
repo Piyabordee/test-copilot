@@ -5,7 +5,7 @@
 In Claude Code, type:
 
 ```
-GitHub: Piyabordee/glm-test-engineer
+GitHub: Piyabordee/test-copilot
 ```
 
 The plugin will be automatically discovered and installed. No manual steps required.
@@ -21,7 +21,7 @@ The plugin will be automatically discovered and installed. No manual steps requi
 ## Folder Structure
 
 ```
-glm-test-engineer/
+test-copilot/
 ├── .claude-plugin/
 │   └── plugin.json
 ├── agents/
@@ -42,7 +42,7 @@ glm-test-engineer/
 
 ```json
 {
-  "name": "glm-test-engineer",
+  "name": "test-copilot",
   "version": "0.1.0",
   "description": "AI-powered test engineering agent for creating, reviewing, and improving test strategies and test cases for any software project",
   "author": {
@@ -66,8 +66,8 @@ glm-test-engineer/
     "bdd",
     "gherkin"
   ],
-  "repository": "https://github.com/Piyabordee/glm-test-engineer",
-  "homepage": "https://github.com/Piyabordee/glm-test-engineer"
+  "repository": "https://github.com/Piyabordee/test-copilot",
+  "homepage": "https://github.com/Piyabordee/test-copilot"
 }
 ```
 
@@ -76,7 +76,7 @@ glm-test-engineer/
 ```markdown
 ---
 name: test-engineer-agent
-description: Create, review, or improve test strategies and test cases for any type of software project. Triggered by the /glm-test-engineer:test-engineer command.
+description: Create, review, or improve test strategies and test cases for any type of software project. Triggered by the /test-copilot:test-engineer command.
 tools: Bash, Read, Skill, Glob, Grep
 ---
 
@@ -165,7 +165,7 @@ description: Use this agent when you need to create, review, or improve test str
 
 # Test Engineer
 
-Invoke @glm-test-engineer:test-engineer-agent to create, review, or improve test strategies and test cases for any type of software project.
+Invoke @test-copilot:test-engineer-agent to create, review, or improve test strategies and test cases for any type of software project.
 
 This agent specializes in:
 - Writing API test suites (REST/GraphQL)
@@ -654,7 +654,7 @@ This plugin extends Claude Code with a specialized test engineering agent.
 
 In Claude Code, run:
 ```
-/glm-test-engineer:test-engineer
+/test-copilot:test-engineer
 ```
 
 ## Command overview
@@ -680,7 +680,7 @@ Create, review, or improve test strategies and test cases.
 
 ## Example Output
 
-When you run `/glm-test-engineer:test-engineer` in a Node.js REST API project, you can expect:
+When you run `/test-copilot:test-engineer` in a Node.js REST API project, you can expect:
 
 ```
 # Test Strategy: My API Project
@@ -735,28 +735,28 @@ Navigate to the `plugins` directory and create the following structure:
 
 ```bash
 # Windows (Command Prompt)
-mkdir glm-test-engineer
-mkdir glm-test-engineer\.claude-plugin
-mkdir glm-test-engineer\agents
-mkdir glm-test-engineer\commands
-mkdir glm-test-engineer\skills
-mkdir glm-test-engineer\skills\test-engineer-skill
+mkdir test-copilot
+mkdir test-copilot\.claude-plugin
+mkdir test-copilot\agents
+mkdir test-copilot\commands
+mkdir test-copilot\skills
+mkdir test-copilot\skills\test-engineer-skill
 ```
 
 ```bash
 # Windows (PowerShell)
-New-Item -ItemType Directory -Path "glm-test-engineer\.claude-plugin"
-New-Item -ItemType Directory -Path "glm-test-engineer\agents"
-New-Item -ItemType Directory -Path "glm-test-engineer\commands"
-New-Item -ItemType Directory -Path "glm-test-engineer\skills\test-engineer-skill"
+New-Item -ItemType Directory -Path "test-copilot\.claude-plugin"
+New-Item -ItemType Directory -Path "test-copilot\agents"
+New-Item -ItemType Directory -Path "test-copilot\commands"
+New-Item -ItemType Directory -Path "test-copilot\skills\test-engineer-skill"
 ```
 
 ```bash
 # macOS/Linux
-mkdir -p glm-test-engineer/.claude-plugin
-mkdir -p glm-test-engineer/agents
-mkdir -p glm-test-engineer/commands
-mkdir -p glm-test-engineer/skills/test-engineer-skill
+mkdir -p test-copilot/.claude-plugin
+mkdir -p test-copilot/agents
+mkdir -p test-copilot/commands
+mkdir -p test-copilot/skills/test-engineer-skill
 ```
 
 ### Step 3: Create the files
@@ -782,8 +782,8 @@ Add the following entry to the `plugins` array:
 
 ```json
 {
-  "name": "glm-test-engineer",
-  "source": "./plugins/glm-test-engineer",
+  "name": "test-copilot",
+  "source": "./plugins/test-copilot",
   "category": "development",
   "description": "AI-powered test engineering agent for creating, reviewing, and improving test strategies and test cases."
 }
@@ -815,8 +815,8 @@ The complete `marketplace.json` should look like:
       "description": "Submit case feedback and bug reports for GLM Coding Plan service."
     },
     {
-      "name": "glm-test-engineer",
-      "source": "./plugins/glm-test-engineer",
+      "name": "test-copilot",
+      "source": "./plugins/test-copilot",
       "category": "development",
       "description": "AI-powered test engineering agent for creating, reviewing, and improving test strategies and test cases."
     }
@@ -832,7 +832,7 @@ Close and restart Claude Code for the plugin to be loaded.
 
 In Claude Code, run:
 ```
-/glm-test-engineer:test-engineer
+/test-copilot:test-engineer
 ```
 
 The agent should now be available and ready to help with test engineering tasks.
