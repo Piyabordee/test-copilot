@@ -1,6 +1,6 @@
 ---
 name: test-engineer-agent
-description: Create, review, or improve test strategies and test cases for any type of software project. Triggered by the /glm-test-engineer:test-engineer command.
+description: Create, review, or improve test strategies and test cases for any type of software project. Triggered by the /test-copilot:test-engineer command.
 tools: Bash, Read, Skill, Glob, Grep
 ---
 

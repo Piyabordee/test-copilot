@@ -1,17 +1,14 @@
-# GLM Test Engineer Plugin
+# Test Copilot
 
-Test engineering agent for creating, reviewing, and improving test strategies and test cases for any type of software project.
+AI-powered test engineering agent for creating, reviewing, and improving test strategies and test cases for any type of software project.
 
-Attention:
-
-- This plugin is designed to work specifically with the GLM Coding Plan in Claude Code.
-- This plugin extends Claude Code with a specialized test engineering agent.
+This plugin extends Claude Code with a specialized test engineering agent.
 
 ## How to use
 
 In Claude Code, run:
 ```
-/glm-test-engineer:test-engineer
+/test-copilot:test-engineer
 ```
 
 ## Command overview
@@ -37,7 +34,7 @@ Create, review, or improve test strategies and test cases.
 
 ## Example Output
 
-When you run `/glm-test-engineer:test-engineer` in a Node.js REST API project, you can expect:
+When you run `/test-copilot:test-engineer` in a Node.js REST API project, you can expect:
 
 ```
 # Test Strategy: My API Project
