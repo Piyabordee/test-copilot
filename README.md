@@ -1,6 +1,8 @@
-# GLM Test Engineer
+# Test Copilot
 
 AI-powered test engineering agent for creating, reviewing, and improving test strategies and test cases for any type of software project.
+
+It follows an **AI-DLC** workflow — **Generate → Human Validate → Execute** — split into two approval-gated steps so AI drafts and humans approve before any code is written.
 
 ## Installation
 
@@ -20,24 +22,38 @@ See [INSTALLATION.md](INSTALLATION.md) for step-by-step manual setup.
 
 ## How to Use
 
-In Claude Code, run:
+**Step 1 — Generate a test strategy (read-only):**
 
 ```
 /test-copilot:test-engineer
 ```
 
+The agent analyzes the codebase, produces a complete test strategy, then **stops and asks you to review**. Iterate until you are satisfied, then reply `APPROVE`.
+
+**Step 2 — Turn the approved strategy into code (writes files):**
+
+```
+/test-copilot:generate-tests
+```
+
+The agent generates runnable tests that mirror the approved cases, using your existing test framework, and conditionally proposes a CI pipeline.
+
 ## Command Overview
 
-### /test-engineer
+### /test-copilot:test-engineer — Strategy (Step 1 of 2)
 
-Create, review, or improve test strategies and test cases.
+Analyze the codebase and produce a test strategy and test cases for human review. Does **not** write files.
 
 **Execution flow:**
 
-1. Command `/test-engineer` triggers `@test-engineer-agent`
-2. The agent scans the codebase: detects project type, test framework, and inventories existing tests
-3. The agent invokes the `test-engineer-skill` for deep testing knowledge
-4. The agent generates a complete test strategy and self-checks output quality before delivering
+1. Gathers business context, detects project type & test framework, and inventories existing tests
+2. Invokes the `test-engineer-skill` for deep testing knowledge
+3. Produces a complete test strategy and self-checks it
+4. **Stops and asks for approval** — reply `APPROVE` when satisfied
+
+### /test-copilot:generate-tests — Code (Step 2 of 2)
+
+Turn the approved strategy into executable test code and CI config. **Writes files.** Requires an approved strategy in the conversation.
 
 **Specializations:**
 
@@ -52,20 +68,24 @@ Create, review, or improve test strategies and test cases.
 ## Architecture
 
 ```
-Command → Agent → Skill
-   │         │        │
-   │         └── 4-phase QA engineer protocol
-   │              ├── Phase 1: Reconnaissance (project scan)
-   │              ├── Phase 2: Invoke Skill (load knowledge)
-   │              ├── Phase 3: Generate Output (strategy + checklist)
-   │              └── Phase 4: Self-Check (quality verify)
-   │
-   └── Entry point (/test-copilot:test-engineer)
+Step 1 — Strategy (read-only)          Step 2 — Code (writes files)
+/test-copilot:test-engineer            /test-copilot:generate-tests
+   │                                       │
+   └── test-engineer-agent                 └── test-codegen-agent
+        ├── Reconnaissance & Context             ├── Load approved strategy
+        ├── Invoke Skill                         ├── Invoke Skill (codegen)
+        ├── Generate Strategy                    ├── Generate code (existing framework)
+        ├── Self-Check                           ├── Place files (ai-generated/)
+        └── STOP → reply APPROVE ───────────▶    ├── CI & secrets (conditional)
+                                                 └── Self-Check
+                         │                               │
+                         └────── test-engineer-skill ────┘
+                          (knowledge, templates, checklists, codegen rules)
 ```
 
-## Example Output
+## Example
 
-When you run `/test-copilot:test-engineer` in a Node.js REST API project, you can expect:
+**Step 1** — in a Node.js REST API project, `/test-copilot:test-engineer` produces:
 
 ```
 # Test Strategy: My API Project
@@ -73,10 +93,6 @@ When you run `/test-copilot:test-engineer` in a Node.js REST API project, you ca
 ## Detected Project Type
 - Primary: REST API (Express.js)
 - Test Framework: Jest + Supertest
-
-## Test Plan Summary
-- Total test suites: 12
-- Total test cases: 87
 
 ## Test Cases
 
@@ -87,12 +103,11 @@ When you run `/test-copilot:test-engineer` in a Node.js REST API project, you ca
 | 2 | Login with wrong password | POST | /api/auth/login | {email, "wrong"} | 401 + error | Critical |
 | 3 | Rate limit after 5 failures | POST | /api/auth/login | 6x failed login | 429 + Retry-After | Critical |
 
-### Security Tests
-- [ ] SQL injection on login email field
-- [ ] JWT expiry validation
-- [ ] No PII in error responses
-
 ### Recommended Next Steps
 1. Add test files: tests/auth.test.ts, tests/users.test.ts
 2. Run: npm test -- --coverage
+
+> Please review this test strategy. Reply APPROVE, then run /test-copilot:generate-tests.
 ```
+
+**Step 2** — after you reply `APPROVE`, `/test-copilot:generate-tests` writes the actual `tests/*.test.ts` files using Jest + Supertest and proposes a CI step.

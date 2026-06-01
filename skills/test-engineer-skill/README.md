@@ -1,6 +1,6 @@
 # Test Engineer Skill
 
-The domain knowledge base for the GLM Test Engineer agent.
+The domain knowledge base for the Test Copilot agents.
 
 ## What It Contains
 
@@ -14,9 +14,11 @@ The domain knowledge base for the GLM Test Engineer agent.
 
 ## How It Works
 
-This skill is invoked automatically by the `test-engineer-agent` during Phase 2 of its execution protocol. You do not need to invoke it directly — use the `/test-copilot:test-engineer` command instead.
+This skill is invoked automatically by both `test-engineer-agent` (when producing a test strategy) and `test-codegen-agent` (when generating code). You do not need to invoke it directly — use the `/test-copilot:test-engineer` and `/test-copilot:generate-tests` commands instead.
 
 ## Related Files
 
-- `agents/test-engineer-agent.md` — The orchestrating agent that calls this skill
-- `commands/test-engineer.md` — The slash command entry point
+- `agents/test-engineer-agent.md` — Strategy agent (step 1) that calls this skill
+- `agents/test-codegen-agent.md` — Codegen agent (step 2) that calls this skill
+- `commands/test-engineer.md` — Strategy slash command (step 1)
+- `commands/generate-tests.md` — Codegen slash command (step 2)

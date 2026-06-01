@@ -1,6 +1,6 @@
 ---
 name: test-engineer-skill
-description: Comprehensive test engineering knowledge base for creating, reviewing, and improving test strategies and test cases. Use when writing test cases, designing test strategies, performing security testing, checking OWASP Top 10 vulnerabilities, generating REST API contract tests, writing BDD-Gherkin scenarios for web applications, testing GraphQL queries and mutations, creating mobile app test matrices, testing microservices with circuit breakers and event-driven patterns, setting performance benchmarks, prioritizing tests by risk level, detecting project type for test framework selection, or reviewing existing test coverage. Invoked by test-engineer-agent during test strategy generation.
+description: Comprehensive test engineering knowledge base for creating, reviewing, and improving test strategies and test cases. Use when writing test cases, designing test strategies, performing security testing, checking OWASP Top 10 vulnerabilities, generating REST API contract tests, writing BDD-Gherkin scenarios for web applications, testing GraphQL queries and mutations, creating mobile app test matrices, testing microservices with circuit breakers and event-driven patterns, setting performance benchmarks, prioritizing tests by risk level, detecting project type for test framework selection, reviewing existing test coverage, generating executable test code (Playwright, Jest, Vitest, pytest, JUnit, etc.) from an approved strategy, or scaffolding CI pipelines for tests. Invoked by test-engineer-agent (strategy generation) and test-codegen-agent (code generation).
 ---
 
 # Test Engineer Skill
@@ -446,6 +446,70 @@ Stress test: Double expected peak load → verify graceful degradation, not cras
 2. Run `npx playwright test --reporter=html`
 3. Add accessibility audit: `npx axe-core --include=register`
 ```
+
+---
+
+## Executable Code Generation
+
+**Used by `test-codegen-agent` only — after a human approves the strategy.** This converts approved test cases into runnable code. It does NOT apply to the strategy phase.
+
+### Framework Selection (stay agnostic)
+
+- **Use the framework already configured in the project. Never swap a working framework.**
+- Map by layer when generating:
+  - API / unit / integration → the detected unit framework (Jest+Supertest, Vitest, pytest, JUnit, xUnit, Go testing…).
+  - Web E2E / UI → an E2E framework. **Default to Playwright ONLY when the project is Web/E2E AND no E2E framework (Cypress, Playwright, etc.) already exists.** If one exists, generate for it.
+  - Mobile → the detected mobile framework (Detox, Maestro, integration_test). Do NOT force Playwright.
+
+### Playwright Code Best Practices (when Playwright applies)
+
+Generated Playwright code MUST follow these rules:
+
+- **Resilient locators only.** Use `page.getByRole()`, `page.getByLabel()`, `page.getByText()`, or `page.getByTestId()`. Never brittle CSS/XPath tied to layout.
+- **No hard-coded waits.** Never `page.waitForTimeout()`. Rely on Playwright auto-waiting and web-first assertions like `await expect(locator).toBeVisible()`.
+- **BDD → code mapping.** Wrap each Gherkin step in `await test.step('<step text>', async () => { ... })` so the run maps back to the approved scenarios reviewed in the strategy phase.
+- **Test isolation.** Data/setup goes in `test.beforeEach()` (or fixtures). No shared mutable state, no ordering dependency — every test must run alone.
+
+```ts
+// tests/e2e/ai-generated/login.spec.ts  (mirrors an approved BDD scenario)
+import { test, expect } from '@playwright/test';
+
+test.describe('User Login', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/login'); // base URL from playwright.config, not hard-coded
+  });
+
+  test('login fails with incorrect password', async ({ page }) => {
+    await test.step('enter credentials', async () => {
+      await page.getByLabel('Email').fill('user@example.com');
+      await page.getByLabel('Password').fill('wrongpassword');
+      await page.getByRole('button', { name: 'Sign In' }).click();
+    });
+    await test.step('see error and stay on page', async () => {
+      await expect(page.getByText('Invalid email or password')).toBeVisible();
+      await expect(page).toHaveURL(/\/login/);
+    });
+  });
+});
+```
+
+### File Placement
+
+- Write AI-drafted tests to a clearly labeled location (e.g. `tests/e2e/ai-generated/`, or `<existing-test-dir>/ai-generated/`) so human-written vs. AI-drafted code stays distinguishable.
+- Follow the project's existing naming convention. Never overwrite a human-written test.
+
+### CI/CD Generation (conditional)
+
+- **Only if the project has no CI running tests**, propose a pipeline. If CI already exists, suggest the smallest step to add — never replace it.
+- GitHub Actions is the default target; detect and respect another CI if present (GitLab CI, CircleCI, etc.).
+- For Playwright, the pipeline should: install with `npx playwright install --with-deps`, run `npx playwright test`, and publish the Playwright HTML report as a CI artifact.
+
+### Secrets, Environment & Test Data
+
+- Never hard-code base URLs, credentials, tokens, or PII in test code or CI files.
+- Read base URL and environment from config (`playwright.config.ts`, env vars), not literals.
+- Inject credentials/tokens via CI secrets (e.g. GitHub Actions `secrets.*`); document which secrets are required.
+- Test data setup belongs in `beforeEach`/fixtures and must be self-cleaning or isolated per run — never depend on data left behind by another test.
 
 ---
 

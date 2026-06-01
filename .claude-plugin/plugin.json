@@ -1,6 +1,6 @@
 {
   "name": "test-copilot",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "AI-powered test engineering agent for creating, reviewing, and improving test strategies and test cases for any software project",
   "author": {
     "name": "Piyabordee",
